@@ -1,0 +1,32 @@
+/* Chatbot css */
+.user-message {
+  text-align: right;
+  color: white;
+  background-color: darkblue;
+  padding: 8px 15px;
+  border-radius: 12px 12px 0 12px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.assistant-message {
+  text-align: left;
+  color: black;
+  background-color: lightblue;
+  padding: 8px 15px;
+  border-radius: 12px 12px 12px 0;
+  margin: 5px;
+  display: inline-block;
+}
+
+.chatbot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+}
+
+.chatbot-wrapper {
+  width: 700px;
+  /* Add other styles as needed */
+}
