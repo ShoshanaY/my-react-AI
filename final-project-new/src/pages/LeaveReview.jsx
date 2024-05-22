@@ -17,7 +17,7 @@ const startPayment = async ({ setError, setTxs, token, amount, constantWalletAdd
     const signer = provider.getSigner();
     let tokenContract;
     if (token === "TRP") {
-      tokenContract = new ethers.Contract(Object.values(TRP_ADDRESS)[0], Object.values(TRP_ABI)[0], provider);
+      tokenContract = new ethers.Contract(Object.values(TRP_ADDRESS)[0], Object.values(TRP_ABI)[0], signer);
       console.log(tokenContract);
     } else {
       throw new Error(`Unsupported token: ${token}`);
@@ -26,7 +26,7 @@ const startPayment = async ({ setError, setTxs, token, amount, constantWalletAdd
     console.log(decimals);
     const amountInWei = ethers.utils.parseUnits(amount.toString(), decimals);
     console.log(amountInWei);
-    const constantWalletContract = new ethers.Contract(constantWalletAddress, Object.values(TRP_ABI)[0], provider);
+    const constantWalletContract = new ethers.Contract(constantWalletAddress, Object.values(TRP_ABI)[0], signer);
     const constantWalletSigner = constantWalletContract.connect(signer);
     const addr = await signer.getAddress();
     const tx = await constantWalletSigner.transfer(addr, amountInWei);
@@ -53,7 +53,7 @@ export default function PayTrip() {
     e.preventDefault();
     setError();
     const token = "TRP";
-    const amount = 1;
+    const amount = 5;
     const constantWalletAddress = Object.values(CONSTANT_WALLET_ADDRESS)[0];
     await startPayment({
         setError,
@@ -215,6 +215,12 @@ const Section2 = styled.section`
     outline: none;
     box-shadow: 0 0 5px rgba(123, 97, 255, 0.5);
   }
+
+  .error-message, .tx-list {
+    margin-top: 10px;
+  }
+
+  `;
 
   .error-message, .tx-list {
     margin-top: 10px;
